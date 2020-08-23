@@ -27,3 +27,20 @@ npx mikro-orm migration:create를 하면 현재 스키마와 다른 점을 확�
     <li>아직은 컨테이너가 실행 후 바로 죽지 않도록 watch만 하도록 작업</li>
 </ul>
 </details>
+
+### 3. Apollo Server Express Setup
+```bash
+$ yarn add express apollo-server-express graphql type-graphql
+$ yarn add -D @types/express
+```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+        리졸버(Resolver) <br />
+        그래프 큐엘에서 데이터를 가져오는 구체적인 과정을 담당 <br />
+        리졸버를 통해서 데이터 source의 종류에 상관 없이 구현이 가능
+    </li>
+</ul>
+</details>
