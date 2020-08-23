@@ -13,7 +13,7 @@ services:
   web:
     container_name: web
     build: .
-    command: yarn watch
+    command: yarn dev
     volumes:
       - .:/code
     ports:
