@@ -44,3 +44,26 @@ $ yarn add -D @types/express
     </li>
 </ul>
 </details>
+
+### 4. MikroORM TypeGraphQL Crud
+```bash
+$ yarn add reflect-metadata
+```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+        뮤테이션(Mutation) <br />
+        데이터를 수정할 때 GET을 사용하지 않는 것처럼 GraphQL에서는 데이터를 생성 및 수정할때는 Mutation을 사용 <br />
+        Mutation을 사용하지 않고서도 데이터의 생성 및 변경이 가능하지만 Mutation을 사용하도록 하자 <br />
+        Query와 Mutation의 가장 큰 차이는 Query는 병렬로 실행되지만 Mutation은 순차적으로 실행이 된다!
+        <a href="https://bricoler.tistory.com/2">[참고]</a>
+    </li>
+    <li>
+        MikroORM의 persistAndFlush <br />
+        persist와 flush를 동시에 수행 <br />
+        persist는 데이터를 생성하는 것을 말하고 flush는 commit과 같은 의미인듯 하다
+    </li>
+</ul>
+</details>
