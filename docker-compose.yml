@@ -13,7 +13,7 @@ services:
   web:
     container_name: web
     build: .
-    command: yarn dev
+    command: bash -c "yarn && npx mikro-orm migration:create && yarn dev"
     volumes:
       - .:/code
     ports:
