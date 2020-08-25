@@ -67,3 +67,18 @@ $ yarn add reflect-metadata
     </li>
 </ul>
 </details>
+
+### 5. Register Resolver
+```bash
+$ yarn add argon2
+```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+        최근 떠오르는 암호화툴? Argon2 
+        <a href="https://velog.io/@rosewwross/Argon2-%EC%95%94%ED%98%B8%ED%99%94-tool">[참고]</a><br />
+    </li>
+</ul>
+</details>
