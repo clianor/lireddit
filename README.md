@@ -42,6 +42,11 @@ $ yarn add -D @types/express
         그래프 큐엘에서 데이터를 가져오는 구체적인 과정을 담당 <br />
         리졸버를 통해서 데이터 source의 종류에 상관 없이 구현이 가능
     </li>
+    <li>
+        type-graphql <br />
+        클래스와 데코레이터만을 이용하여 스키마를 정의하기 위한 TypeGraphQL 
+        <a href="https://github.com/MichalLytek/type-graphql">[참고]</a>
+    </li>
 </ul>
 </details>
 
@@ -64,6 +69,11 @@ $ yarn add reflect-metadata
         MikroORM의 persistAndFlush <br />
         persist와 flush를 동시에 수행 <br />
         persist는 데이터를 생성하는 것을 말하고 flush는 commit과 같은 의미인듯 하다
+    </li>
+    <li>
+        reflect-metadata <br />
+        데코레이터 문법을 지원하기 위한 Polyfill <br />
+        TypeORM을 사용하고 있다면 이미 설치되어 있을것이지만 여기서는 mikro-orm을 사용중이기 때문에 설치
     </li>
 </ul>
 </details>
