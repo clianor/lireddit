@@ -96,3 +96,28 @@ $ yarn add argon2
 ### 6. Login Resolver
 
 별 다른 내용은 없었음
+
+### 7. Session Authentication
+```bash
+$ yarn add redis connect-redis express-session
+$ yarn add -D @types/redis @types/connect-redis @types/express-session
+```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+        typescript에서 아래와 같이 사용하면 req.session이 null이어도 사용할 수 있다.<br />
+        req.session!.userId = user.id; <a href="https://www.inflearn.com/questions/10222">[참고]</a>
+    </li>
+    <li>
+        이 강의에서는 Request & { session: Express.Session }와 같이 타입 결합을 사용한다. <br />
+        이를 Intersection Types라고 한다. <a href="https://infoscis.github.io/2017/06/19/TypeScript-handbook-advanced-types/">[참고]</a>
+    </li>
+    <li>
+        강의를 따라하다 에러가 났다... <br />
+        Request와 Express.Session의 타입 결합 부분에서 타입 에러가 발생하는데... <br />
+        문제를 못찾았음..
+    </li>
+</ul>
+</details>
