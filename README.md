@@ -92,3 +92,7 @@ $ yarn add argon2
     </li>
 </ul>
 </details>
+
+### 6. Login Resolver
+
+별 다른 내용은 없었음
