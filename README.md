@@ -136,4 +136,16 @@ $ yarn add -D @types/redis @types/connect-redis @types/express-session
 ### 9. Next.js + Chakra
 ```bash
 $ npx create-next-app --example with-chakra-ui frontend 
+$ yarn add -D typescript @types/node
+$ yarn add formik
 ```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    Chakra UI는 오픈된 지 얼마 안 된 라이브러리이지만, 최근 중요하게 여겨지는 접근성을 최우선 지원으로 둔 UI 라이브러리로
+    나온 지 얼마 안됐지만 인기가 많다고합니다.
+    </li>
+</ul>
+</details>
