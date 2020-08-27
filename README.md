@@ -132,3 +132,8 @@ $ yarn add -D @types/redis @types/connect-redis @types/express-session
     </li>
 </ul>
 </details>
+
+### 9. Next.js + Chakra
+```bash
+$ npx create-next-app --example with-chakra-ui frontend 
+```

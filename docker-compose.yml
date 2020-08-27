@@ -31,3 +31,16 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    command: bash -c "yarn && yarn dev"
+    volumes:
+      - ./frontend:/code
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
