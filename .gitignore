@@ -1,4 +1,7 @@
 .idea/
+
 **/node_modules/
 **/dist/
+
 backend/src/migrations/
+docker/
