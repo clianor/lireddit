@@ -116,8 +116,19 @@ $ yarn add -D @types/redis @types/connect-redis @types/express-session
     </li>
     <li>
         강의를 따라하다 에러가 났다... <br />
-        Request와 Express.Session의 타입 결합 부분에서 타입 에러가 발생하는데... <br />
-        문제를 못찾았음..
+        TypeCasting으로 해결! <br />
+        마침 해결하지 못하고 있던분이 깃헙에 계시길래 해결법 달아줌 > _ < <a href="https://github.com/benawad/lireddit/commit/cd945b296484946d81b38e45401f18c9e07b2603">[링크]</a>
+    </li>
+</ul>
+</details>
+
+### 8. Sessions Explained
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+        redis에 값이 어떻게 할당이 되어 있는지에 관한 설명 이었음
     </li>
 </ul>
 </details>
