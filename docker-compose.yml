@@ -24,9 +24,9 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
     command: bash -c "yarn && yarn create:migration && yarn dev"
-    restart: always
     volumes:
-      - ./backend:/code
+      - ./backend:/code/backend
+      - /code/backend/node_modules
     ports:
       - "8000:8000"
     depends_on:
@@ -39,7 +39,8 @@ services:
       dockerfile: ./Dockerfile
     command: bash -c "yarn && yarn dev"
     volumes:
-      - ./frontend:/code
+      - ./frontend:/code/frontend
+      - /code/frontend/node_modules
     ports:
       - "3000:3000"
     depends_on:

@@ -1,6 +1,10 @@
 FROM node:12
+
 RUN mkdir /code
-WORKDIR /code
-RUN yarn
-COPY . /code/
+RUN mkdir /code/backend
+WORKDIR /code/backend
+
+VOLUME /code/backend
+VOLUME /code/backend/node_modules
+
 CMD ["yarn", "watch"]
