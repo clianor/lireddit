@@ -206,3 +206,7 @@ $ yarn add -D @graphql-codegen/cli @graphql-codegen/typescript-react-apollo
     </li>
 </ul>
 </details>
+
+### 12. Register Error Handling
+
+강의랑 다르게 오다보니 원래 12에서 작업해야하는 내용을 일부 11에서 작업완료
