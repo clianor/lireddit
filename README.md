@@ -210,3 +210,15 @@ $ yarn add -D @graphql-codegen/cli @graphql-codegen/typescript-react-apollo
 ### 12. Register Error Handling
 
 강의랑 다르게 오다보니 원래 12에서 작업해야하는 내용을 일부 11에서 작업완료
+
+### 13. NavBar
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    로그인 기능을 구현하고 NavBar를 만들었으나 로그인 직후 index 페이지로 이동해도 로그인 된것으로 나오지 않는 문제가 있음. <br />
+    이는 cache 문제로 다음 파트에서 설명할 예정. 
+    </li>
+</ul>
+</details>
