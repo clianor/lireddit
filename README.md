@@ -218,7 +218,18 @@ $ yarn add -D @graphql-codegen/cli @graphql-codegen/typescript-react-apollo
 <ul>
     <li>
     로그인 기능을 구현하고 NavBar를 만들었으나 로그인 직후 index 페이지로 이동해도 로그인 된것으로 나오지 않는 문제가 있음. <br />
-    이는 cache 문제로 다음 파트에서 설명할 예정. 
+    이는 cache 문제임 
     </li>
 </ul>
 </details>
+
+### 14. Apollo-Client Cache Updates
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    GraphQL에는 Fragment라는 것이 있는데 이는 재사용이 뛰어는 쿼리문의 파편을 의미한다. <br />
+    동일한 구조 반복하여 가지는 field를 정의할때 fragment 구문을 사용하면 편리.
+    </li>
+</ul>
