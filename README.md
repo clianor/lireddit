@@ -149,3 +149,29 @@ $ yarn add formik
     </li>
 </ul>
 </details>
+
+## 10. Apollo-Client Basics
+```bash
+# frontend
+$ yarn add @apollo/client graphql
+# backend 
+$ yarn add cors
+$ yarn add -D @types/cors
+```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    ApolloClient는 GraphQL로 로컬 및 원격 데이터를 모두 관리할 수 있는 JavaScript용 종합 상태 관리 라이브러리입니다. <br />
+    이 기능을 사용하여 응용 프로그램 데이터를 가져오고, 캐시하고, 수정하면서 UI를 자동으로 업데이트합니다.
+    </li>
+    <li>
+        Request.credentials <br />
+        cross-origin 호출에 따라 user credentials을 어떻게 처리할지에 관한 내용이다.
+        <a href="https://developer.mozilla.org/ko/docs/Web/API/Request/credentials">[참고]</a> <br />
+        이 프로젝트에서는 "include"로 셋팅하여 cross-origin 호출이더라도 user credentials을 받는다. <br />
+        단 서버측에서도 credentials 옵션이 true로 설정되어 있어야한다. 
+    </li>
+</ul>
+</details>

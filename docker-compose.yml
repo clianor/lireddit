@@ -32,6 +32,8 @@ services:
       - /code/backend/node_modules
     ports:
       - "8000:8000"
+    expose:
+      - "8000"
     depends_on:
       - db
 
@@ -46,5 +48,7 @@ services:
       - /code/frontend/node_modules
     ports:
       - "3000:3000"
+    expose:
+      - "3000"
     depends_on:
       - backend

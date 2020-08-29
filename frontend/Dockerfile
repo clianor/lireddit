@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14
 
 RUN mkdir /code
 RUN mkdir /code/frontend
