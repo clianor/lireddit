@@ -175,3 +175,34 @@ $ yarn add -D @types/cors
     </li>
 </ul>
 </details>
+
+### 11. GraphQL Code Generator
+```bash
+# frontend
+$ yarn add -D @graphql-codegen/cli @graphql-codegen/typescript-react-apollo
+```
+
+`yarn graphql-codegen init` 입력후 아래와 같이 선택 또는 입력
+```properties
+? What type of application are you building? Application built with React
+? Where is your schema?: (path or url) http://Host.docker.internal:8000/graphql
+? Where are your operations and fragments?: src/graphql/**/*.graphql
+? Pick plugins: TypeScript (required by othyer typescript plugins), TypeScript Operations (operations and fragments), TypeScript React Apollo (typed components and HOCs)
+? Where to write the output: src/generated/graphql.tsx
+? Do you want to generate an introspection file? No
+? How to name the config file? codegen.yml
+? What script in package.json should run the codegen? gen
+```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    GraphQL Code Generator <br />
+    graphql 스키마를 클라이언트에서 작성후 Code Generator를 통해 TypeScript 타입을 생성하고 사용하였음 
+    </li>
+    <li>
+    도커 내부에서 호스트의 IP를 사용하기 위해서는 Host.docker.internal를 사용하면 된다.
+    </li>
+</ul>
+</details>
