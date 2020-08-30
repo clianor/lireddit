@@ -34,7 +34,11 @@ export class UserResolver {
     @Ctx() {em}: MyContext
   ) {
     const user = await em.findOne(User, {email});
-    console.log(user);
+    if (!user) {
+      // the email is not in the db
+      return true;
+    }
+
     return true;
   }
 

@@ -266,3 +266,12 @@ $ yarn add nodemailer
 ```
 
 아직 이메일을 보내는 과정은 포함되지 않음
+
+### 18. Change Password
+```bash
+# backend
+$ yarn add ioredis uuid
+$ yarn add -D @types/ioredis @types/uuid
+```
+
+ioredis는 많은 기능을 제공하는 빠른 속도의 라이브러리입니다. [[참고]](https://bcho.tistory.com/1099)
