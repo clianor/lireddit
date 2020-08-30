@@ -1,5 +1,8 @@
 # Fullstack React GraphQL TypeScript Tutorial
 
+`docker-compose up`으로 실행할 수 있으며   
+작업된 결과물은 `http://Host.docker.internal:3000`로 확인할 수 있습니다
+
 ### 1. Node/TypeScript Setup
 ```bash
 $ yarn add -D @types/node typescript ts-node
