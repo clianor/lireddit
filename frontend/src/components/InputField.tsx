@@ -14,9 +14,9 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 export const InputField: React.FC<InputFieldProps> = ({
-                                                        size: _,
-                                                        ...props
-                                                      }) => {
+  size: _,
+  ...props
+}) => {
   const [field, {error}]: any = useField(props);
   return (
     <FormControl isInvalid={!!error}>

@@ -10,7 +10,7 @@ export class PostResolver {
   }
 
   @Query(() => Post, {nullable: true})
-  post(
+  async post(
     @Arg("id", () => Int) id: number,
     @Ctx() {em}: MyContext
   ): Promise<Post | null> {
@@ -51,12 +51,7 @@ export class PostResolver {
     @Arg("id") id: number,
     @Ctx() {em}: MyContext
   ): Promise<Boolean> {
-    try {
-      await em.nativeDelete(Post, {id});
-    } catch (err) {
-      return false;
-    }
-
+    await em.nativeDelete(Post, {id});
     return true;
   }
 }

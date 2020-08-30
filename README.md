@@ -236,3 +236,20 @@ $ yarn add -D @graphql-codegen/cli @graphql-codegen/typescript-react-apollo
 
 ### 15. Logout
 
+### 16. SSR
+```bash
+$ yarn add next-with-apollo
+```
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    http://Host.docker.internal:3000으로 접속하지 않으면 쿠키가 전달이 안되는 문제가 있음. <br />
+    실제 도메인으로 한다면 문제가 없을것으로 보임 localhost로 보내면 apollo가 127.0.0.1로 보내서 그런것으로 보이는데 둘다 로컬인데 뭐가 문제인가.. <br />
+    </li>
+    <li>
+    쿠키가 변경이되어도 아폴로의 스토어는 변경이 되지 않아 명시적으로 client.resetStore()를 호출해주어야함. <br />
+    자동화할 방법은?
+    </li>
+</ul>

@@ -9,11 +9,13 @@ import {InputField} from "../../components/InputField";
 import {useRegisterMutation} from "../../generated/graphql";
 import {useRouter} from "next/router";
 import {toErrorMap} from "../../utils/toErrorMap";
+import {useApolloClient} from "@apollo/client";
 
 interface registerProps {
 }
 
 const Register: React.FC<registerProps> = ({}) => {
+  const client = useApolloClient()
   const router = useRouter();
   const [register, ] = useRegisterMutation();
 
@@ -26,7 +28,11 @@ const Register: React.FC<registerProps> = ({}) => {
             variables: {
               options: values
             }
-          });
+          })
+            .then(async (response) => {
+              await client.resetStore();
+              return response;
+            });
           if (response.data?.register.errors) {
             setErrors(toErrorMap(response.data.register.errors));
           } else {
