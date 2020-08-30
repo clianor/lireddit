@@ -263,6 +263,7 @@ $ yarn add next-with-apollo
 ```bash
 # backend
 $ yarn add nodemailer
+$ yarn add -D @types/nodemailer
 ```
 
 아직 이메일을 보내는 과정은 포함되지 않음

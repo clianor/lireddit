@@ -10,7 +10,7 @@ import {UserResolver} from "./resolvers/user";
 import Redis from "ioredis";
 import session from "express-session";
 import connectRedis from "connect-redis";
-import {__prod__, COOKIE_NAME} from "./constants";
+import {__prod__, COOKIE_NAME, DEV_URL} from "./constants";
 import {MyContext} from "./types";
 import cors from "cors";
 
@@ -64,7 +64,10 @@ const main = async () => {
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(port, () => {
-    console.log(`server started on localhost:${port}`);
+    if (__prod__)
+      console.log(`server started on localhost:${port}`);
+    else
+      console.log(`server started on ${DEV_URL}:${port}`);
   })
 }
 
