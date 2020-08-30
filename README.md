@@ -256,3 +256,11 @@ $ yarn add next-with-apollo
     자동화할 방법은?
     </li>
 </ul>
+
+### 17. Forgot Password 
+```bash
+# backend
+$ yarn add nodemailer
+```
+
+아직 이메일을 보내는 과정은 포함되지 않음

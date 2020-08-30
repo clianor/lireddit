@@ -9,12 +9,16 @@ export class User {
   id!: number;
 
   @Field(() => String)
-  @Property({type: "date"})
+  @Property({type: "date", onCreate: () => new Date()})
   createdAt = new Date();
 
   @Field(() => String)
   @Property({type: "date", onUpdate: () => new Date()})
   updatedAt = new Date();
+
+  @Field()
+  @Property({ type: "text", unique: true })
+  email!: string;
 
   @Field()
   @Property({type: "text", unique: true})
