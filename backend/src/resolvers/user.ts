@@ -2,9 +2,7 @@ import {
   Resolver,
   Mutation,
   Arg,
-  Field,
   Ctx,
-  ObjectType,
   Query,
 } from "type-graphql";
 import {MyContext} from "../types";
@@ -12,23 +10,67 @@ import {User} from "../entities/User";
 import argon2 from "argon2";
 import {EntityManager} from "@mikro-orm/postgresql";
 import {__prod__, COOKIE_NAME, DEV_URL, FORGET_PASSWORD_PREFIX} from "../constants";
-import {FieldError} from "./FieldError";
 import {UsernamePasswordInput} from "./UsernamePasswordInput";
 import {validateRegister} from "../utils/validateRegister";
 import {v4} from "uuid";
 import {sendEmail} from "../utils/sendEmail";
+import {UserResponse} from "./UserResponse";
 
-@ObjectType()
-class UserResponse {
-  @Field(() => [FieldError], {nullable: true})
-  errors?: FieldError[];
-
-  @Field(() => User, {nullable: true})
-  user?: User;
-}
 
 @Resolver()
 export class UserResolver {
+  @Mutation(() => UserResponse)
+  async changePassword(
+    @Arg("token") token: string,
+    @Arg("newPassword") newPassword: string,
+    @Ctx() {redis, em, req}: MyContext,
+  ): Promise<UserResponse> {
+    if (newPassword.length <= 2) {
+      return {
+        errors: [
+          {
+            field: "newPassword",
+            message: "length must be greater than 2",
+          },
+        ],
+      };
+    }
+
+    const key = FORGET_PASSWORD_PREFIX + token;
+    const userId = await redis.get(key);
+    if (!userId) {
+      return {
+        errors: [
+          {
+            field: "token",
+            message: "token expired",
+          },
+        ],
+      };
+    }
+
+    const user = await em.findOne(User, {id: parseInt(userId)});
+    if (!user) {
+      return {
+        errors: [
+          {
+            field: "token",
+            message: "user no longer exists"
+          }
+        ]
+      }
+    }
+
+    user.password = await argon2.hash(newPassword);
+    await em.persistAndFlush(user);
+
+    await redis.del(key);
+
+    // log in user after change password
+    req.session.userId = user.id;
+    return {user};
+  }
+
   @Mutation(() => Boolean)
   async forgotPassword(
     @Arg("email") email: string,

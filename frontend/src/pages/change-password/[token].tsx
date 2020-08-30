@@ -1,20 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
 import {NextPage} from "next";
 import {Wrapper} from "../../components/Wrapper";
 import {Formik, Form} from "formik";
 import {Login} from "../auth/login";
 import {toErrorMap} from "../../utils/toErrorMap";
 import {InputField} from "../../components/InputField";
-import {Button} from "@chakra-ui/core/dist";
+import {Button, Flex, Box, Link} from "@chakra-ui/core";
+import {useRouter} from "next/router";
+import {useChangePasswordMutation} from "../../generated/graphql";
+import NextLink from "next/link";
 
-const ChangePassword: NextPage<{token: string}> = ({token}) => {
+const ChangePassword: NextPage<{ token: string }> = ({token}) => {
+  const router = useRouter();
+  const [changePassword,] = useChangePasswordMutation();
+  const [tokenError, setTokenError] = useState("");
+
   return (
     <Wrapper variant="small">
       <Formik
-        initialValues={{ newPassword: "" }}
-        onSubmit={async (values, { setErrors }) => {
-          console.log(token);
-          console.log(values, setErrors);
+        initialValues={{newPassword: ""}}
+        onSubmit={async (values, {setErrors}) => {
+          const {newPassword} = values;
+
+          const response = await changePassword({
+            variables : {
+              newPassword,
+              token,
+            }
+          });
+
+          if (response.data?.changePassword.errors) {
+            const errorMap = toErrorMap(response.data.changePassword.errors);
+            if ("token" in errorMap) {
+              setTokenError(errorMap.token);
+            }
+            setErrors(errorMap);
+          } else if (response.data?.changePassword.user) {
+            await router.push("/");
+          }
         }}
       >
         {({isSubmitting}) => (
@@ -25,6 +48,16 @@ const ChangePassword: NextPage<{token: string}> = ({token}) => {
               label="New Password"
               type="password"
             />
+            {tokenError ? (
+              <Flex>
+                <Box mr={2} style={{ color: "red" }}>
+                  {tokenError}
+                </Box>
+                <NextLink href="/forgot-password">
+                  <Link>click here to get a new one</Link>
+                </NextLink>
+              </Flex>
+            ) : null}
             <Button
               mt={4}
               type="submit"
@@ -40,7 +73,7 @@ const ChangePassword: NextPage<{token: string}> = ({token}) => {
   );
 };
 
-ChangePassword.getInitialProps = ({ query }) => {
+ChangePassword.getInitialProps = ({query}) => {
   return {
     token: query.token as string,
   }
