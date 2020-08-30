@@ -236,6 +236,7 @@ $ yarn add -D @graphql-codegen/cli @graphql-codegen/typescript-react-apollo
     동일한 구조 반복하여 가지는 field를 정의할때 fragment 구문을 사용하면 편리.
     </li>
 </ul>
+</details>
 
 ### 15. Logout
 
@@ -256,6 +257,7 @@ $ yarn add next-with-apollo
     자동화할 방법은?
     </li>
 </ul>
+</details>
 
 ### 17. Forgot Password 
 ```bash
