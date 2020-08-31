@@ -1,24 +1,24 @@
-import React, {useEffect} from "react";
-import {Box, Button, Flex, Link} from "@chakra-ui/core";
-import {useLogoutMutation, useMeQuery} from "../generated/graphql";
+import React from "react";
+import { Box, Button, Flex, Link } from "@chakra-ui/core";
+import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import NextLink from "next/link";
-import {useRouter} from "next/router";
-import {useApolloClient} from "@apollo/client";
+import { useRouter } from "next/router";
+import { useApolloClient } from "@apollo/client";
 
-interface NavBarProps {
-}
+interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
-  const client = useApolloClient()
+  const client = useApolloClient();
   const router = useRouter();
-  const [logout, {loading: logoutLoading}] = useLogoutMutation();
-  const {data, loading} = useMeQuery();
+  const [logout, { loading: logoutLoading }] = useLogoutMutation();
+  const { data, loading } = useMeQuery();
 
   let body = null;
 
-  if (loading) { // data loading
-
-  } else if (!data?.me) { // user not logged in
+  if (loading) {
+    // data loading
+  } else if (!data?.me) {
+    // user not logged in
     body = (
       <>
         <NextLink href="/auth/login">
@@ -29,7 +29,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         </NextLink>
       </>
     );
-  } else { // user is logged in
+  } else {
+    // user is logged in
     body = (
       <Flex>
         <Box mr={2}>{data.me.username}</Box>
@@ -37,12 +38,14 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
           onClick={async () => {
             const result = await logout()
               .then(async (response) => {
-                return await client.resetStore().then(() => response.data?.logout);
+                return await client
+                  .resetStore()
+                  .then(() => response.data?.logout);
               })
               .catch((error) => console.error(error));
 
             if (result) {
-              await router.push("/")
+              await router.push("/");
             }
           }}
           isLoading={logoutLoading}
@@ -51,7 +54,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
           logout
         </Button>
       </Flex>
-    )
+    );
   }
 
   return (
@@ -59,4 +62,4 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       <Box ml={"auto"}>{body}</Box>
     </Flex>
   );
-}
+};

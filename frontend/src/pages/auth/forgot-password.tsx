@@ -1,13 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
-import {Wrapper} from "../../components/Wrapper";
-import {useForgotPasswordMutation} from "../../generated/graphql";
-import {Box, Button} from "@chakra-ui/core";
-import {InputField} from "../../components/InputField";
+import { Wrapper } from "../../components/Wrapper";
+import { useForgotPasswordMutation } from "../../generated/graphql";
+import { Box, Button } from "@chakra-ui/core";
+import { InputField } from "../../components/InputField";
 
 const ForgotPassword: React.FC<{}> = ({}) => {
   const [complete, setComplete] = useState(false);
-  const [forgotPassword, ] = useForgotPasswordMutation();
+  const [forgotPassword] = useForgotPasswordMutation();
 
   return (
     <Wrapper variant="small">
@@ -18,7 +18,7 @@ const ForgotPassword: React.FC<{}> = ({}) => {
           setComplete(true);
         }}
       >
-        {({isSubmitting}) =>
+        {({ isSubmitting }) =>
           complete ? (
             <Box>
               if an account with that email exists, we sent you can email
@@ -44,7 +44,7 @@ const ForgotPassword: React.FC<{}> = ({}) => {
         }
       </Formik>
     </Wrapper>
-  )
-}
+  );
+};
 
 export default ForgotPassword;

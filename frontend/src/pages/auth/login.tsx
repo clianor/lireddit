@@ -1,39 +1,37 @@
 import React from "react";
-import {Formik, Form} from "formik";
-import {Box, Button, Flex, Link} from "@chakra-ui/core";
-import {Wrapper} from "../../components/Wrapper";
-import {InputField} from "../../components/InputField";
-import {useLoginMutation} from "../../generated/graphql";
-import {useRouter} from "next/router";
-import {toErrorMap} from "../../utils/toErrorMap";
-import {NavBar} from "../../components/NavBar";
-import {useApolloClient} from "@apollo/client";
+import { Formik, Form } from "formik";
+import { Box, Button, Flex, Link } from "@chakra-ui/core";
+import { Wrapper } from "../../components/Wrapper";
+import { InputField } from "../../components/InputField";
+import { useLoginMutation } from "../../generated/graphql";
+import { useRouter } from "next/router";
+import { toErrorMap } from "../../utils/toErrorMap";
+import { NavBar } from "../../components/NavBar";
+import { useApolloClient } from "@apollo/client";
 import NextLink from "next/link";
 
-interface loginProps {
-}
+interface loginProps {}
 
 const Login: React.FC<loginProps> = ({}) => {
-  const client = useApolloClient()
+  const client = useApolloClient();
   const router = useRouter();
-  const [login, ] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <Wrapper variant="small">
         <Formik
-          initialValues={{usernameOrEmail: "", password: ""}}
+          initialValues={{ usernameOrEmail: "", password: "" }}
           onSubmit={async (values, { setErrors }) => {
             const response = await login({
               variables: {
-                ...values
-              }
-            })
-              .then(async (response) => {
-                await client.resetStore();
-                return response;
-              });
+                ...values,
+              },
+            }).then(async (response) => {
+              await client.resetStore();
+              return response;
+            });
             if (response.data?.login.errors) {
               setErrors(toErrorMap(response.data.login.errors));
             } else {
@@ -41,7 +39,7 @@ const Login: React.FC<loginProps> = ({}) => {
             }
           }}
         >
-          {({isSubmitting}) => (
+          {({ isSubmitting }) => (
             <Form>
               <InputField
                 name="usernameOrEmail"

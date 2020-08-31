@@ -1,5 +1,5 @@
 import React from "react";
-import {Box} from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 
 interface WrapperProps {
   variant?: "small" | "regular";
@@ -7,7 +7,7 @@ interface WrapperProps {
 
 export const Wrapper: React.FC<WrapperProps> = ({
   children,
-  variant = "regular"
+  variant = "regular",
 }) => {
   return (
     <Box
@@ -19,4 +19,4 @@ export const Wrapper: React.FC<WrapperProps> = ({
       {children}
     </Box>
   );
-}
+};

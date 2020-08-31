@@ -1,14 +1,16 @@
-import {UsernamePasswordInput} from "../resolvers/UsernamePasswordInput";
-import {FieldError} from "../resolvers/FieldError";
+import { UsernamePasswordInput } from "../resolvers/UsernamePasswordInput";
+import { FieldError } from "../resolvers/FieldError";
 
-export const validateRegister = (options: UsernamePasswordInput): [FieldError] | null => {
+export const validateRegister = (
+  options: UsernamePasswordInput
+): [FieldError] | null => {
   if (!options.email.includes("@")) {
     return [
       {
         field: "email",
         message: "invalid email",
       },
-    ]
+    ];
   }
 
   if (options.username.length <= 2) {
@@ -39,4 +41,4 @@ export const validateRegister = (options: UsernamePasswordInput): [FieldError] |
   }
 
   return null;
-}
+};
