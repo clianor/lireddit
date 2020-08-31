@@ -282,3 +282,5 @@ ioredis는 많은 기능을 제공하는 빠른 속도의 라이브러리입니�
 $ yarn remove @mikro-orm/cli @mikro-orm/core @mikro-orm/migrations @mikro-orm/postgresql
 $ yarn add typeorm
 ```
+
+### 20. Many to One
