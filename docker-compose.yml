@@ -25,7 +25,7 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
-    command: bash -c "yarn && yarn create:migration && yarn dev"
+    command: bash -c "yarn && yarn dev"
     restart: always
     volumes:
       - ./backend:/code/backend

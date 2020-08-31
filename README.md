@@ -276,3 +276,9 @@ $ yarn add -D @types/ioredis @types/uuid
 ```
 
 ioredis는 많은 기능을 제공하는 빠른 속도의 라이브러리입니다. [[참고]](https://bcho.tistory.com/1099)
+
+### 19. Switching to TypeORM
+```bash
+$ yarn remove @mikro-orm/cli @mikro-orm/core @mikro-orm/migrations @mikro-orm/postgresql
+$ yarn add typeorm
+```
