@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import { Wrapper } from "../../components/Wrapper";
 import { Formik, Form } from "formik";
-import { Login } from "../auth/login";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../../components/InputField";
 import { Button, Flex, Box, Link } from "@chakra-ui/core";
@@ -10,7 +9,7 @@ import { useRouter } from "next/router";
 import { useChangePasswordMutation } from "../../generated/graphql";
 import NextLink from "next/link";
 
-const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
+const ChangePassword: NextPage = () => {
   const router = useRouter();
   const [changePassword] = useChangePasswordMutation();
   const [tokenError, setTokenError] = useState("");
@@ -25,7 +24,10 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
           const response = await changePassword({
             variables: {
               newPassword,
-              token,
+              token:
+                typeof router.query.token === "string"
+                  ? router.query.token
+                  : "",
             },
           });
 
@@ -71,12 +73,6 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
       </Formik>
     </Wrapper>
   );
-};
-
-ChangePassword.getInitialProps = ({ query }) => {
-  return {
-    token: query.token as string,
-  };
 };
 
 export default ChangePassword;

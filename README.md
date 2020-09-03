@@ -288,3 +288,16 @@ $ yarn add typeorm
 ### 21. Error Handling
 
 backend와 frontend에서 각각 처리를 backend에서는 isAuth 미들웨어 함수를 작성하여 권한 체크를 처리하였으며 frontend에서는 useIsAuth라는 커스텀 훅을 사용하여 인증을 처리하였음
+
+### 22. Next.js Query Params
+
+흔히 권한이 없는 페이지인 경우 로그인하면 다시 그 페이지로 돌아가는 기능인 next page 기능을 query string으로 구현
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    query string을 이용하면 next page 기능을 구현할 수 있다.
+    </li>
+</ul>
+</details>
