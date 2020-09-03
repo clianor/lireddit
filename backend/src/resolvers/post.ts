@@ -39,6 +39,10 @@ export class PostResolver {
     @Arg("input") input: PostInput,
     @Ctx() { req }: MyContext
   ): Promise<Post> {
+    if (input.title.length < 2) {
+      throw "post's length must be greater than 2";
+    }
+
     return Post.create({
       ...input,
       creatorId: req.session.userId,

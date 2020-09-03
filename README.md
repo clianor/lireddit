@@ -284,3 +284,7 @@ $ yarn add typeorm
 ```
 
 ### 20. Many to One
+
+### 21. Error Handling
+
+backend와 frontend에서 각각 처리를 backend에서는 isAuth 미들웨어 함수를 작성하여 권한 체크를 처리하였으며 frontend에서는 useIsAuth라는 커스텀 훅을 사용하여 인증을 처리하였음
