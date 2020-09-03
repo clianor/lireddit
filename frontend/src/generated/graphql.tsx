@@ -20,6 +20,12 @@ export type Query = {
 };
 
 
+export type QueryPostsArgs = {
+  cursor?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
+};
+
+
 export type QueryPostArgs = {
   id: Scalars['Int'];
 };
@@ -227,7 +233,10 @@ export type MeQuery = (
   )> }
 );
 
-export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
+export type PostsQueryVariables = Exact<{
+  cursor?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
+}>;
 
 
 export type PostsQuery = (
@@ -497,8 +506,8 @@ export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const PostsDocument = gql`
-    query Posts {
-  posts {
+    query Posts($cursor: String, $limit: Int!) {
+  posts(cursor: $cursor, limit: $limit) {
     id
     createdAt
     updatedAt
@@ -519,6 +528,8 @@ export const PostsDocument = gql`
  * @example
  * const { data, loading, error } = usePostsQuery({
  *   variables: {
+ *      cursor: // value for 'cursor'
+ *      limit: // value for 'limit'
  *   },
  * });
  */
