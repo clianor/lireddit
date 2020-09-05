@@ -1,11 +1,36 @@
 import { GetStaticProps } from "next";
-import { initializeApollo } from "../../lib/apolloClient";
-import { PostsDocument } from "../generated/graphql";
-import { Layout } from "../components/Layout";
-import { Link, Stack, Box, Heading, Text, Flex, Button } from "@chakra-ui/core";
 import NextLink from "next/link";
+import { Link, Stack, Box, Heading, Text, Flex, Button } from "@chakra-ui/core";
+import { initializeApollo } from "../../lib/apolloClient";
+import { PostsDocument, usePostsQuery } from "../generated/graphql";
+import { Layout } from "../components/Layout";
 
-const Index = ({ posts, loading }: any) => {
+const Index = ({ data }: any) => {
+  const { data: results, loading, fetchMore } = usePostsQuery({
+    variables: {
+      limit: 10,
+      cursor: null,
+    },
+  });
+
+  const handleClick = () => {
+    if (results?.posts) {
+      fetchMore({
+        variables: {
+          limit: 10,
+          cursor: results.posts[results.posts.length - 1].createdAt,
+        },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+
+          return Object.assign({}, prev, {
+            posts: [...prev.posts, ...fetchMoreResult.posts],
+          });
+        },
+      });
+    }
+  };
+
   return (
     <Layout>
       <Flex align="center">
@@ -17,16 +42,17 @@ const Index = ({ posts, loading }: any) => {
 
       <br />
       <Stack spacing={8}>
-        {posts.map((p: any) => (
-          <Box key={p.id} p={5} shadow="md" borderWidth="1px">
-            <Heading fontSize="xl">{p.title}</Heading>
-            <Text mt={4}>{p.textSnippet}</Text>
-          </Box>
-        ))}
+        {results?.posts &&
+          results.posts.map((p: any) => (
+            <Box key={p.id} p={5} shadow="md" borderWidth="1px">
+              <Heading fontSize="xl">{p.title}</Heading>
+              <Text mt={4}>{p.textSnippet}</Text>
+            </Box>
+          ))}
       </Stack>
-      {posts ? (
+      {data.posts ? (
         <Flex>
-          <Button isLoading={loading} m="auto" my={8}>
+          <Button onClick={handleClick} isLoading={loading} m="auto" my={8}>
             load more
           </Button>
         </Flex>
@@ -38,18 +64,28 @@ const Index = ({ posts, loading }: any) => {
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo();
 
-  const { data, loading } = await apolloClient.query({
+  const { data } = await apolloClient.query({
     query: PostsDocument,
     variables: {
       limit: 10,
+      cursor: null as null | string | undefined,
     },
   });
+
+  console.dir(
+    await apolloClient.query({
+      query: PostsDocument,
+      variables: {
+        limit: 10,
+        cursor: null as null | string | undefined,
+      },
+    })
+  );
 
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
-      posts: data.posts,
-      loading,
+      data: data,
     },
   };
 };
