@@ -314,3 +314,5 @@ backend와 frontend에서 각각 처리를 backend에서는 isAuth 미들웨어 
 </details>
 
 ### 24. GraphQL Fetching Relationships
+
+### 25. GraphQL Field Permissions
