@@ -316,3 +316,14 @@ backend와 frontend에서 각각 처리를 backend에서는 isAuth 미들웨어 
 ### 24. GraphQL Fetching Relationships
 
 ### 25. GraphQL Field Permissions
+
+### 26. Many to Many
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    Updoot이라는 엔티티 추가
+    </li>
+</ul>
+</details>

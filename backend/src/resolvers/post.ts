@@ -40,6 +40,34 @@ export class PostResolver {
     return post.text.slice(0, 50);
   }
 
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
+  async vote(
+    @Arg("postId", () => Int) postId: number,
+    @Arg("value", () => Int) value: number,
+    @Ctx() { req }: MyContext
+  ) {
+    const isUpdoot = value !== -1;
+    const realValue = isUpdoot ? 1 : -1;
+    const { userId } = req.session;
+
+    await getConnection().query(
+      `
+    START TRANSACTION;
+
+    insert into updoot ("userId", "postId", value)
+    values (${userId},${postId},${realValue});
+    update post
+    set points = points + ${realValue}
+    where id = ${postId};
+
+    COMMIT;
+      `
+    );
+
+    return true;
+  }
+
   @Query(() => PaginatedPosts)
   async posts(
     @Arg("limit", () => Int) limit: number,
@@ -48,18 +76,9 @@ export class PostResolver {
     const realLimit = Math.min(50, limit);
     const realLimitPlusOne = realLimit + 1;
 
-    // const qb = getConnection()
-    //   .getRepository(Post)
-    //   .createQueryBuilder("p")
-    //   .orderBy('"createdAt"', "DESC")
-    //   .take(realLimitPlusOne);
-
     const replacements: any[] = [realLimitPlusOne];
 
     if (cursor) {
-      // qb.where('"createdAt" < :cursor', {
-      //   cursor: new Date(parseInt(cursor)),
-      // });
       replacements.push(new Date(parseInt(cursor)));
     }
 
