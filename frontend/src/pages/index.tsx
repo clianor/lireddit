@@ -5,26 +5,31 @@ import { initializeApollo } from "../../lib/apolloClient";
 import { PostsDocument, usePostsQuery } from "../generated/graphql";
 import { Layout } from "../components/Layout";
 
+const limit = 33;
+
 const Index = ({ data }: any) => {
   const { data: results, loading, fetchMore } = usePostsQuery({
     variables: {
-      limit: 10,
+      limit: limit,
       cursor: null,
     },
   });
 
   const handleClick = () => {
-    if (results?.posts) {
+    if (results?.posts.hasMore) {
       fetchMore({
         variables: {
-          limit: 10,
-          cursor: results.posts[results.posts.length - 1].createdAt,
+          limit: limit,
+          cursor: results.posts.posts[results.posts.posts.length - 1].createdAt,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
 
           return Object.assign({}, prev, {
-            posts: [...prev.posts, ...fetchMoreResult.posts],
+            posts: {
+              hasMore: fetchMoreResult.posts.hasMore,
+              posts: [...prev.posts.posts, ...fetchMoreResult.posts.posts],
+            },
           });
         },
       });
@@ -43,7 +48,7 @@ const Index = ({ data }: any) => {
       <br />
       <Stack spacing={8}>
         {results?.posts &&
-          results.posts.map((p: any) => (
+          results.posts.posts.map((p: any) => (
             <Box key={p.id} p={5} shadow="md" borderWidth="1px">
               <Heading fontSize="xl">{p.title}</Heading>
               <Text mt={4}>{p.textSnippet}</Text>
@@ -67,7 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data } = await apolloClient.query({
     query: PostsDocument,
     variables: {
-      limit: 10,
+      limit: limit,
       cursor: null as null | string | undefined,
     },
   });
@@ -76,7 +81,7 @@ export const getStaticProps: GetStaticProps = async () => {
     await apolloClient.query({
       query: PostsDocument,
       variables: {
-        limit: 10,
+        limit: limit,
         cursor: null as null | string | undefined,
       },
     })

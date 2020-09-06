@@ -303,3 +303,12 @@ backend와 frontend에서 각각 처리를 backend에서는 isAuth 미들웨어 
 </details>
 
 ### 23. More Pagination
+
+<details>
+<summary>요약</summary>
+<ul>
+    <li>
+    캐시를 변경하는 policy 정책이나 merge를 이용한 방법들로 쿼리의 병합이 가능한듯 하나 몰라 fetchMore만 이용하여 구현
+    </li>
+</ul>
+</details>

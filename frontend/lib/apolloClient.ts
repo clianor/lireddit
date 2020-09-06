@@ -13,7 +13,11 @@ function createApolloClient() {
     cache: new InMemoryCache({
       typePolicies: {
         Posts: {
-          keyFields: ["id", "title"],
+          fields: {
+            posts: {
+              keyArgs: ["id"],
+            },
+          },
         },
       },
     }),
