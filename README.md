@@ -327,3 +327,5 @@ backend와 frontend에서 각각 처리를 backend에서는 isAuth 미들웨어 
     </li>
 </ul>
 </details>
+
+### 27. Invalidate Queries

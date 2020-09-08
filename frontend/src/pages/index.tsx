@@ -5,12 +5,12 @@ import { initializeApollo } from "../../lib/apolloClient";
 import { PostsDocument, usePostsQuery } from "../generated/graphql";
 import { Layout } from "../components/Layout";
 
-const limit = 33;
+const limit = 15;
 
 const Index = ({ data }: any) => {
   const { data: results, loading, fetchMore } = usePostsQuery({
     variables: {
-      limit: limit,
+      limit,
       cursor: null,
     },
   });
@@ -19,7 +19,7 @@ const Index = ({ data }: any) => {
     if (results?.posts.hasMore) {
       fetchMore({
         variables: {
-          limit: limit,
+          limit,
           cursor: results.posts.posts[results.posts.posts.length - 1].createdAt,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
@@ -51,6 +51,7 @@ const Index = ({ data }: any) => {
           results.posts.posts.map((p: any) => (
             <Box key={p.id} p={5} shadow="md" borderWidth="1px">
               <Heading fontSize="xl">{p.title}</Heading>
+              <Text>posted by {p.creator.username}</Text>
               <Text mt={4}>{p.textSnippet}</Text>
             </Box>
           ))}
@@ -72,7 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data } = await apolloClient.query({
     query: PostsDocument,
     variables: {
-      limit: limit,
+      limit,
       cursor: null as null | string | undefined,
     },
   });
@@ -81,7 +82,7 @@ export const getStaticProps: GetStaticProps = async () => {
     await apolloClient.query({
       query: PostsDocument,
       variables: {
-        limit: limit,
+        limit,
         cursor: null as null | string | undefined,
       },
     })
